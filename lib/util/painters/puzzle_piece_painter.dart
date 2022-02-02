@@ -32,16 +32,16 @@ class PuzzlePiecePainter extends CustomPainter {
       ..scale(piece.positionRadiusStart / piece.imageRadiusStart)
       ..translate(-center.width, -center.height);
     final clipPath = Path()
-      ..moveTo(center.width + cos(piece.imageAngleStart) * imageSize * piece.imageRadiusStart, center.height - sin(piece.imageAngleStart) * imageSize * piece.imageRadiusStart)
+      ..moveTo(center.width + cos(piece.imageAngleStart) * uiSize / 2 * piece.imageRadiusStart, center.height - sin(piece.imageAngleStart) * uiSize / 2 * piece.imageRadiusStart)
       ..arcToPoint(
-        Offset(center.width + cos(piece.imageAngleEnd) * imageSize * piece.imageRadiusStart, center.height - sin(piece.imageAngleEnd) * imageSize * piece.imageRadiusStart),
-        radius: Radius.circular(imageSize * piece.imageRadiusStart),
+        Offset(center.width + cos(piece.imageAngleEnd) * uiSize / 2 * piece.imageRadiusStart, center.height - sin(piece.imageAngleEnd) * uiSize / 2 * piece.imageRadiusStart),
+        radius: Radius.circular(uiSize / 2 * piece.imageRadiusStart),
         clockwise: false,
       )
-      ..lineTo(center.width + cos(piece.imageAngleEnd) * imageSize * piece.imageRadiusEnd, center.height - sin(piece.imageAngleEnd) * imageSize * piece.imageRadiusEnd)
+      ..lineTo(center.width + cos(piece.imageAngleEnd) * uiSize / 2 * piece.imageRadiusEnd, center.height - sin(piece.imageAngleEnd) * uiSize / 2 * piece.imageRadiusEnd)
       ..arcToPoint(
-        Offset(center.width + cos(piece.imageAngleStart) * imageSize * piece.imageRadiusEnd, center.height - sin(piece.imageAngleStart) * imageSize * piece.imageRadiusEnd),
-        radius: Radius.circular(imageSize * piece.imageRadiusEnd),
+        Offset(center.width + cos(piece.imageAngleStart) * uiSize / 2 * piece.imageRadiusEnd, center.height - sin(piece.imageAngleStart) * uiSize / 2 * piece.imageRadiusEnd),
+        radius: Radius.circular(uiSize / 2 * piece.imageRadiusEnd),
       )
       ..close();
     final pathPaint = Paint()
@@ -62,6 +62,6 @@ class PuzzlePiecePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return oldDelegate is! PuzzlePiecePainter || oldDelegate.image != image || oldDelegate.piece != piece;
+    return oldDelegate is! PuzzlePiecePainter || oldDelegate.image != image || oldDelegate.piece != piece || oldDelegate.isSolved != isSolved;
   }
 }

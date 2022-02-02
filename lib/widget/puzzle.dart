@@ -169,20 +169,18 @@ class _PuzzleState extends State<Puzzle> {
     if (image == null || _animationTimer != null) return;
     final size = MediaQuery.of(context).size;
     var position = details.localPosition - Offset(size.width, size.height) / 2;
-    position = position / max(image.width, image.height).toDouble();
+    position = position / min(size.width, size.height).toDouble() * 2;
     final angle = (atan2(-position.dy, position.dx) + (pi * 2)) % (pi * 2);
     final radius = position.distance;
     final index = pieces.indexWhere((piece) => piece.isInside(angle, radius));
-    if (index != -1) {
-      _movePiece(pieces[index], index);
-    }
+    if (index != -1) _movePiece(pieces[index], index);
   }
 
   @override
   Widget build(BuildContext context) {
     if (_imageAsUIImage == null) return const Center(child: CircularProgressIndicator());
     final size = MediaQuery.of(context).size;
-    final bgWidth = min(size.width, size.height) * radii.last * 1.89;
+    final bgWidth = min(size.width, size.height) * radii.last * 2;
     return GestureDetector(
       onTapDown: _onTapDown,
       child: Stack(
@@ -199,6 +197,7 @@ class _PuzzleState extends State<Puzzle> {
           ),
           Positioned.fill(
             child: CustomPaint(
+              size: Size(bgWidth, bgWidth),
               painter: PuzzleCenterPainter(
                 image: _imageAsUIImage!,
                 imageRadiusEnd: radii.first,
