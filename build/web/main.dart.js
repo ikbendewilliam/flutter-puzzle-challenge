@@ -46907,25 +46907,24 @@ s=B.O.i(0,300)
 s.toString
 return new A.qU(A.ri(B.bc,A.a([A.wx(r,r,r,r,new A.f6(r,r,r,r,r,new A.mf(B.r1,0.5,B.as,r,0,A.a([q,s],t.bk),r,r),B.aN),r,r,r,r),B.AN],t.p),B.bV),r)}}
 A.qw.prototype={
-b3(a,b){var s,r,q,p,o,n,m,l,k,j,i=A.aE(),h=i?A.bt():new A.be(new A.bf())
-h.sjf(B.cb)
-i=this.b
-s=i.gap(i)
-r=i.gaj(i)
+b3(a,b){var s,r,q,p,o,n,m,l,k,j=A.aE(),i=j?A.bt():new A.be(new A.bf())
+i.sjf(B.cb)
+j=this.b
+s=j.gap(j)
+r=j.gaj(j)
 q=b.a
 p=b.b
 o=Math.min(q,p)
-n=Math.max(s,r)
-m=o/n
-l=new A.d3(new Float64Array(3))
-l.vs(m)
-k=A.a4q(l)
-j=A.dH()
-j.re(0,A.Q9(new A.v(q,p).eV(0,2),n*this.c))
+n=o/Math.max(s,r)
+m=new A.d3(new Float64Array(3))
+m.vs(n)
+l=A.a4q(m)
+k=A.dH()
+k.re(0,A.Q9(new A.v(q,p).eV(0,2),o*this.c/2))
 a.b7(0)
-a.dh(0,j)
-a.a9(0,k.a)
-a.dO(0,i,new A.v((q/m-s)/2,(p/m-r)/2),h)
+a.dh(0,k)
+a.a9(0,l.a)
+a.dO(0,j,new A.v((q/n-s)/2,(p/n-r)/2),i)
 a.aW(0)},
 jU(a){return!(a instanceof A.qw)||a.b!==this.b||a.c!==this.c}}
 A.qx.prototype={
