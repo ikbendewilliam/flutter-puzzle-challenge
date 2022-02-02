@@ -25,7 +25,7 @@ class PuzzleCenterPainter extends CustomPainter {
     final clipPath = Path()
       ..addOval(Rect.fromCircle(
         center: Offset(size.width, size.height) / 2,
-        radius: imageSize * imageRadiusEnd,
+        radius: uiSize * imageRadiusEnd / 2,
       ));
     canvas.save();
     canvas.clipPath(clipPath);
