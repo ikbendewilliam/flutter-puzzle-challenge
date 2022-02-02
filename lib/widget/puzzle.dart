@@ -215,6 +215,18 @@ class _PuzzleState extends State<Puzzle> {
                   ),
                 ),
               ),
+          AnimatedOpacity(
+            opacity: solved ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 1000),
+            child: Center(
+              child: Image(
+                image: widget.image,
+                fit: BoxFit.contain,
+                height: size.height,
+                width: size.width,
+              ),
+            ),
+          ),
         ],
       ),
     );
