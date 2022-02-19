@@ -9,9 +9,13 @@ import 'dart:ui' as ui;
 
 class Puzzle extends StatefulWidget {
   final ImageProvider image;
+  final int segments;
+  final int radius;
 
   const Puzzle({
     required this.image,
+    required this.segments,
+    required this.radius,
     Key? key,
   }) : super(key: key);
 
@@ -20,14 +24,13 @@ class Puzzle extends StatefulWidget {
 }
 
 class _PuzzleState extends State<Puzzle> {
-  static const maxI = 8;
-  static const deltaAngle = pi * 2 / maxI;
-  static const animationStepDuration = Duration(milliseconds: 10);
-  static const radii = [0.1, 0.2, 0.4];
-  static const animationSteps = 20;
+  static const animationStepDuration = Duration(milliseconds: 5);
   final random = Random();
   final pieces = <PuzzlePiece>[];
   late int hole;
+  late double deltaAngle;
+  late int animationSteps;
+  late List<double> radii;
 
   ImageStreamListener? _imageListener;
   ImageStream? _imageStream;
@@ -38,7 +41,41 @@ class _PuzzleState extends State<Puzzle> {
   @override
   void initState() {
     super.initState();
-    for (var i = 0; i < maxI; i++) {
+    _initPieces();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _getImage();
+  }
+
+  @override
+  void didUpdateWidget(covariant Puzzle oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _animationTimer?.cancel();
+    if (oldWidget.radius != widget.radius || oldWidget.segments != widget.segments) {
+      _initPieces();
+    }
+    if (oldWidget.image != widget.image) {
+      _getImage();
+    }
+  }
+
+  @override
+  void dispose() {
+    if (_imageListener != null) _imageStream?.removeListener(_imageListener!);
+    _animationTimer?.cancel();
+    super.dispose();
+  }
+
+  void _initPieces() {
+    animationSteps = (80 / widget.segments + 30 / widget.radius).floor();
+    deltaAngle = pi * 2 / widget.segments;
+    radii = [0.05625, 0.1125, 0.225, 0.45];
+    radii.removeRange(0, radii.length - widget.radius);
+    pieces.clear();
+    for (var i = 0; i < widget.segments; i++) {
       for (final radius in radii) {
         pieces.add(PuzzlePiece.fromImage(
           imageRadiusStart: radius,
@@ -53,25 +90,16 @@ class _PuzzleState extends State<Puzzle> {
     _checkSolved();
   }
 
-  _checkSolved() {
+  void _checkSolved() {
     if (pieces.every((piece) => piece.isSolved)) {
       setState(() {
         solved = true;
       });
+    } else if (solved) {
+      setState(() {
+        solved = false;
+      });
     }
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _getImage();
-  }
-
-  @override
-  void dispose() {
-    if (_imageListener != null) _imageStream?.removeListener(_imageListener!);
-    _animationTimer?.cancel();
-    super.dispose();
   }
 
   void _shufflePieces() {
@@ -168,7 +196,7 @@ class _PuzzleState extends State<Puzzle> {
     final image = _imageAsUIImage;
     if (image == null || _animationTimer != null) return;
     final size = MediaQuery.of(context).size;
-    var position = details.localPosition - Offset(size.width, size.height) / 2;
+    var position = details.globalPosition - Offset(size.width, size.height) / 2;
     position = position / min(size.width, size.height).toDouble() * 2;
     final angle = (atan2(-position.dy, position.dx) + (pi * 2)) % (pi * 2);
     final radius = position.distance;
