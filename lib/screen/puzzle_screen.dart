@@ -18,6 +18,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   ImageProvider image = const AssetImage(AppConstants.assetDash);
   var radius = 3;
   var segments = 8;
+  var _lightMode = WidgetsBinding.instance?.window.platformBrightness != Brightness.dark;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,15 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   center: Alignment.topRight,
+                  radius: 2,
                   colors: [
-                    Colors.grey[50]!,
-                    Colors.grey[300]!,
+                    _lightMode ? Colors.grey[50]! : Colors.grey[900]!,
+                    _lightMode ? Colors.grey[400]! : Colors.grey[600]!,
                   ],
                 ),
               ),
@@ -46,6 +49,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
             Align(
               alignment: Alignment.bottomLeft,
               child: PuzzleOption(
+                color: _lightMode ? Colors.black : Colors.white,
                 label: 'Segments',
                 value: segments,
                 onChanged: (value) => setState(() => segments = value),
@@ -61,6 +65,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                   if (kIsWeb || Platform.isAndroid || Platform.isIOS)
                     IconButton(
                       icon: const Icon(Icons.add_photo_alternate),
+                      color: _lightMode ? Colors.black : Colors.white,
                       iconSize: 40,
                       onPressed: () async {
                         final _picker = ImagePicker();
@@ -72,6 +77,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                       },
                     ),
                   IconButton(
+                    color: _lightMode ? Colors.black : Colors.white,
                     icon: const Icon(Icons.refresh),
                     iconSize: 40,
                     onPressed: () => setState(() {
@@ -85,11 +91,23 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
             Align(
               alignment: Alignment.bottomRight,
               child: PuzzleOption(
+                color: _lightMode ? Colors.black : Colors.white,
                 label: 'Radius',
                 value: radius,
                 onChanged: (value) => setState(() => radius = value),
                 minValue: 2,
                 maxValue: 4,
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                icon: Icon(_lightMode ? Icons.dark_mode : Icons.light_mode),
+                color: _lightMode ? Colors.black : Colors.white,
+                iconSize: 40,
+                onPressed: () => setState(() {
+                  _lightMode = !_lightMode;
+                }),
               ),
             ),
           ],

@@ -44,19 +44,15 @@ class PuzzlePiecePainter extends CustomPainter {
         radius: Radius.circular(uiSize / 2 * piece.imageRadiusEnd),
       )
       ..close();
-    final pathPaint = Paint()
-      ..color = Colors.black
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3 / (piece.positionRadiusStart / piece.imageRadiusStart);
     canvas.save();
     canvas.transform(matrix4Path.storage);
+    canvas.drawShadow(clipPath, Colors.black, 10, false);
     canvas.clipPath(clipPath);
     canvas.transform(matrix4Image.storage);
     canvas.drawImage(image, Offset((size.width / scale - imageWidth) / 2, (size.height / scale - imageHeight) / 2), paint);
     canvas.restore();
     canvas.save();
     canvas.transform(matrix4Path.storage);
-    if (!isSolved) canvas.drawPath(clipPath, pathPaint);
     canvas.restore();
   }
 

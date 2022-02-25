@@ -193,8 +193,7 @@ class _PuzzleState extends State<Puzzle> {
   }
 
   void _onTapDown(TapDownDetails details) {
-    final image = _imageAsUIImage;
-    if (image == null || _animationTimer != null) return;
+    if (_imageAsUIImage == null || _animationTimer != null) return;
     final size = MediaQuery.of(context).size;
     var position = details.globalPosition - Offset(size.width, size.height) / 2;
     position = position / min(size.width, size.height).toDouble() * 2;

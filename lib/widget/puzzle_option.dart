@@ -6,6 +6,11 @@ class PuzzleOption extends StatelessWidget {
   final ValueChanged<int> onChanged;
   final int maxValue;
   final int minValue;
+  final Color color;
+
+  bool get _canIncrease => value < maxValue;
+
+  bool get _canDecrease => value > minValue;
 
   const PuzzleOption({
     required this.label,
@@ -13,15 +18,16 @@ class PuzzleOption extends StatelessWidget {
     required this.onChanged,
     required this.maxValue,
     required this.minValue,
+    required this.color,
     Key? key,
   }) : super(key: key);
 
   void _increase() {
-    if (value < maxValue) onChanged(value + 1);
+    if (_canIncrease) onChanged(value + 1);
   }
 
   void _decrease() {
-    if (value > minValue) onChanged(value - 1);
+    if (_canDecrease) onChanged(value - 1);
   }
 
   @override
@@ -32,9 +38,10 @@ class PuzzleOption extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
+            color: color,
           ),
         ),
         const SizedBox(width: 10),
@@ -42,18 +49,21 @@ class PuzzleOption extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
+              color: _canIncrease ? color : Colors.grey,
               onPressed: _increase,
               padding: const EdgeInsets.all(0),
               icon: const Icon(Icons.arrow_drop_up),
             ),
             Text(
               value.toString(),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
+                color: color,
               ),
             ),
             IconButton(
+              color: _canDecrease ? color : Colors.grey,
               onPressed: _decrease,
               padding: const EdgeInsets.all(0),
               icon: const Icon(Icons.arrow_drop_down),
