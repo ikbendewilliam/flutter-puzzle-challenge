@@ -16,9 +16,20 @@ class PuzzleScreen extends StatefulWidget {
 
 class _PuzzleScreenState extends State<PuzzleScreen> {
   ImageProvider image = const AssetImage(AppConstants.assetDash);
-  var radius = 3;
-  var segments = 8;
+  var _radius = 3;
+  var _segments = 8;
   var _lightMode = WidgetsBinding.instance?.window.platformBrightness != Brightness.dark;
+  var _scrambleId = 0;
+
+  void _scramble() {
+    setState(() {
+      try {
+        _scrambleId++;
+      } catch (e) {
+        _scrambleId = 0;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +53,9 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
             Positioned.fill(
               child: Puzzle(
                 image: image,
-                segments: segments,
-                radius: radius,
+                segments: _segments,
+                radius: _radius,
+                scrambleId: _scrambleId,
               ),
             ),
             Align(
@@ -51,8 +63,8 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
               child: PuzzleOption(
                 color: _lightMode ? Colors.black : Colors.white,
                 label: 'Segments',
-                value: segments,
-                onChanged: (value) => setState(() => segments = value),
+                value: _segments,
+                onChanged: (value) => setState(() => _segments = value),
                 minValue: 3,
                 maxValue: 32,
               ),
@@ -80,10 +92,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                     color: _lightMode ? Colors.black : Colors.white,
                     icon: const Icon(Icons.refresh),
                     iconSize: 40,
-                    onPressed: () => setState(() {
-                      radius = 3;
-                      segments = 8;
-                    }),
+                    onPressed: _scramble,
                   ),
                 ],
               ),
@@ -93,10 +102,10 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
               child: PuzzleOption(
                 color: _lightMode ? Colors.black : Colors.white,
                 label: 'Radius',
-                value: radius,
-                onChanged: (value) => setState(() => radius = value),
+                value: _radius,
+                onChanged: (value) => setState(() => _radius = value),
                 minValue: 2,
-                maxValue: 4,
+                maxValue: 6,
               ),
             ),
             Align(

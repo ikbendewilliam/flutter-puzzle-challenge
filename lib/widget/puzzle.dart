@@ -11,11 +11,13 @@ class Puzzle extends StatefulWidget {
   final ImageProvider image;
   final int segments;
   final int radius;
+  final int scrambleId;
 
   const Puzzle({
     required this.image,
     required this.segments,
     required this.radius,
+    required this.scrambleId,
     Key? key,
   }) : super(key: key);
 
@@ -31,6 +33,7 @@ class _PuzzleState extends State<Puzzle> {
   late double deltaAngle;
   late int animationSteps;
   late List<double> radii;
+  late double multiplier;
 
   ImageStreamListener? _imageListener;
   ImageStream? _imageStream;
@@ -54,7 +57,7 @@ class _PuzzleState extends State<Puzzle> {
   void didUpdateWidget(covariant Puzzle oldWidget) {
     super.didUpdateWidget(oldWidget);
     _animationTimer?.cancel();
-    if (oldWidget.radius != widget.radius || oldWidget.segments != widget.segments) {
+    if (oldWidget.radius != widget.radius || oldWidget.segments != widget.segments || oldWidget.scrambleId != widget.scrambleId) {
       _initPieces();
     }
     if (oldWidget.image != widget.image) {
@@ -72,14 +75,25 @@ class _PuzzleState extends State<Puzzle> {
   void _initPieces() {
     animationSteps = (80 / widget.segments + 30 / widget.radius).floor();
     deltaAngle = pi * 2 / widget.segments;
-    radii = [0.05625, 0.1125, 0.225, 0.45];
-    radii.removeRange(0, radii.length - widget.radius);
+    if (widget.radius == 2) {
+      multiplier = 2;
+    } else if (widget.radius == 4) {
+      multiplier = 1.4;
+    } else if (widget.radius == 5) {
+      multiplier = 1.35;
+    } else if (widget.radius == 6) {
+      multiplier = 1.3;
+    } else {
+      multiplier = 1.6;
+    }
+    radii = List<double>.generate(widget.radius + 1, (i) => 0.9 / pow(multiplier, widget.radius - i));
+    radii.removeLast();
     pieces.clear();
     for (var i = 0; i < widget.segments; i++) {
       for (final radius in radii) {
         pieces.add(PuzzlePiece.fromImage(
           imageRadiusStart: radius,
-          imageRadiusEnd: radius * 2,
+          imageRadiusEnd: radius * multiplier,
           imageAngleStart: deltaAngle * i,
           imageAngleEnd: deltaAngle * (i + 1),
         ));
@@ -207,7 +221,7 @@ class _PuzzleState extends State<Puzzle> {
   Widget build(BuildContext context) {
     if (_imageAsUIImage == null) return const Center(child: CircularProgressIndicator());
     final size = MediaQuery.of(context).size;
-    final bgWidth = min(size.width, size.height) * radii.last * 2;
+    final bgWidth = min(size.width, size.height) * radii.last * multiplier;
     return GestureDetector(
       onTapDown: _onTapDown,
       child: Stack(

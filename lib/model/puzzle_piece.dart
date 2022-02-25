@@ -86,8 +86,11 @@ class PuzzlePiece {
               positionAngleEnd == other.positionAngleStart ||
               positionAngleStart == other.positionAngleEnd - pi * 2 ||
               positionAngleEnd == other.positionAngleStart + pi * 2) &&
-          (positionRadiusStart == other.positionRadiusStart)) ||
-      ((positionRadiusStart == other.positionRadiusEnd || positionRadiusEnd == other.positionRadiusStart) && (positionAngleStart == other.positionAngleStart));
+          positionRadiusStart == other.positionRadiusStart) ||
+      ((_isRadiusNeighbour(positionRadiusStart, other.positionRadiusEnd) || _isRadiusNeighbour(positionRadiusEnd, other.positionRadiusStart)) &&
+          (positionAngleStart == other.positionAngleStart));
 
   bool isInside(double angle, double radius) => radius >= positionRadiusStart && radius <= positionRadiusEnd && angle >= positionAngleStart && angle <= positionAngleEnd;
+
+  bool _isRadiusNeighbour(double radius1, double radius2) => (radius1 - radius2).abs() <= 0.01;
 }
