@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_puzzle_challenge/widget/puzzle_button.dart';
 
 class PuzzleOption extends StatelessWidget {
   final String label;
@@ -48,7 +49,7 @@ class PuzzleOption extends StatelessWidget {
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconButton(
+            PuzzleButton(
               color: _canIncrease ? color : Colors.grey,
               onPressed: _increase,
               padding: const EdgeInsets.all(0),
@@ -62,7 +63,7 @@ class PuzzleOption extends StatelessWidget {
                 color: color,
               ),
             ),
-            IconButton(
+            PuzzleButton(
               color: _canDecrease ? color : Colors.grey,
               onPressed: _decrease,
               padding: const EdgeInsets.all(0),

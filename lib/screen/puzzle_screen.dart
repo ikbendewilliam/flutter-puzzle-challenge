@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_challenge/util/app_constants.dart';
+import 'package:flutter_puzzle_challenge/util/music_util.dart';
 import 'package:flutter_puzzle_challenge/widget/puzzle.dart';
+import 'package:flutter_puzzle_challenge/widget/puzzle_button.dart';
 import 'package:flutter_puzzle_challenge/widget/puzzle_option.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -20,6 +23,8 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   var _segments = 8;
   var _lightMode = WidgetsBinding.instance?.window.platformBrightness != Brightness.dark;
   var _scrambleId = 0;
+  var _showBlockingScreen = true;
+  var _loadingMusic = true;
 
   void _scramble() {
     setState(() {
@@ -32,7 +37,21 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _loadMusic();
+  }
+
+  Future<void> _loadMusic() async {
+    await MusicUtil.loadMusic();
+    setState(() {
+      _loadingMusic = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -75,7 +94,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (kIsWeb || Platform.isAndroid || Platform.isIOS)
-                    IconButton(
+                    PuzzleButton(
                       icon: const Icon(Icons.add_photo_alternate),
                       color: _lightMode ? Colors.black : Colors.white,
                       iconSize: 40,
@@ -88,7 +107,7 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                         }
                       },
                     ),
-                  IconButton(
+                  PuzzleButton(
                     color: _lightMode ? Colors.black : Colors.white,
                     icon: const Icon(Icons.refresh),
                     iconSize: 40,
@@ -110,13 +129,59 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: IconButton(
+              child: PuzzleButton(
                 icon: Icon(_lightMode ? Icons.dark_mode : Icons.light_mode),
                 color: _lightMode ? Colors.black : Colors.white,
                 iconSize: 40,
                 onPressed: () => setState(() {
                   _lightMode = !_lightMode;
                 }),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: PuzzleButton(
+                icon: Icon(MusicUtil.muted ? Icons.volume_mute : Icons.volume_up),
+                color: _lightMode ? Colors.black : Colors.white,
+                iconSize: 40,
+                onPressed: () async {
+                  await MusicUtil.toggleMute();
+                  setState(() {}); // Update icon
+                },
+              ),
+            ),
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 500),
+              top: _showBlockingScreen ? 0 : -size.height,
+              height: size.height,
+              left: 0,
+              right: 0,
+              child: GestureDetector(
+                onTap: () {
+                  if (!_showBlockingScreen || _loadingMusic) return;
+                  MusicUtil.playBackgroundMusic();
+                  setState(() => _showBlockingScreen = false);
+                },
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 5,
+                      sigmaY: 5,
+                    ),
+                    child: Container(
+                      color: (_lightMode ? Colors.black : Colors.white).withOpacity(0.5),
+                      child: Center(
+                        child: Text(
+                          _loadingMusic ? 'Loading...' : 'Tap to Start',
+                          style: TextStyle(
+                            color: _lightMode ? Colors.white : Colors.black,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

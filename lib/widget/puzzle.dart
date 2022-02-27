@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle_challenge/model/puzzle_piece.dart';
+import 'package:flutter_puzzle_challenge/util/music_util.dart';
 import 'package:flutter_puzzle_challenge/util/painters/puzzle_center_painter.dart';
 import 'package:flutter_puzzle_challenge/util/painters/puzzle_piece_painter.dart';
 import 'dart:ui' as ui;
@@ -156,6 +157,7 @@ class _PuzzleState extends State<Puzzle> {
 
   void _animate(int fromIndex, PuzzlePiece to) {
     _animationTimer?.cancel();
+    MusicUtil.playSlideMusic();
     final from = pieces[fromIndex];
     var deltaAngle = (to.positionAngleStart - from.positionAngleStart) / animationSteps;
     if (deltaAngle > pi / animationSteps) {
