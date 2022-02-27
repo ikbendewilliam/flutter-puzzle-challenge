@@ -9,6 +9,7 @@ import 'package:flutter_puzzle_challenge/widget/puzzle.dart';
 import 'package:flutter_puzzle_challenge/widget/puzzle_button.dart';
 import 'package:flutter_puzzle_challenge/widget/puzzle_option.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PuzzleScreen extends StatefulWidget {
   const PuzzleScreen({Key? key}) : super(key: key);
@@ -52,6 +53,10 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final textStyle = TextStyle(
+      color: _lightMode ? Colors.white : Colors.black,
+      fontSize: 14,
+    );
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -150,6 +155,15 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                 },
               ),
             ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: PuzzleButton(
+                icon: Image.asset(AppConstants.assetGitHub(lightMode: _lightMode)),
+                color: _lightMode ? Colors.black : Colors.white,
+                iconSize: 40,
+                onPressed: () async => await launch(AppConstants.gitHubUrl),
+              ),
+            ),
             AnimatedPositioned(
               duration: const Duration(milliseconds: 500),
               top: _showBlockingScreen ? 0 : -size.height,
@@ -170,14 +184,36 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
                     ),
                     child: Container(
                       color: (_lightMode ? Colors.black : Colors.white).withOpacity(0.5),
-                      child: Center(
-                        child: Text(
-                          _loadingMusic ? 'Loading...' : 'Tap to Start',
-                          style: TextStyle(
-                            color: _lightMode ? Colors.white : Colors.black,
-                            fontSize: 20,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            _loadingMusic ? 'Loading...' : 'Tap to Start',
+                            style: textStyle.copyWith(fontSize: 20),
                           ),
-                        ),
+                          const SizedBox(height: 24),
+                          Text(
+                            'Credits:',
+                            style: textStyle,
+                          ),
+                          Text(
+                            'Development: WiVe',
+                            style: textStyle,
+                          ),
+                          Text(
+                            'Sliding sound: https://freesound.org/people/SwagMuffinPlus/sounds/176146/',
+                            style: textStyle,
+                          ),
+                          Text(
+                            'Background music: https://freesound.org/people/Slaking_97/sounds/459706/',
+                            style: textStyle,
+                          ),
+                          Text(
+                            'Button press: https://mixkit.co/free-sound-effects/game/?page=2',
+                            style: textStyle,
+                          ),
+                        ],
                       ),
                     ),
                   ),

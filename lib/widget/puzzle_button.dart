@@ -3,7 +3,7 @@ import 'package:flutter_puzzle_challenge/util/music_util.dart';
 
 class PuzzleButton extends StatefulWidget {
   final Color color;
-  final Icon icon;
+  final Widget icon;
   final double iconSize;
   final VoidCallback onPressed;
   final EdgeInsetsGeometry padding;
