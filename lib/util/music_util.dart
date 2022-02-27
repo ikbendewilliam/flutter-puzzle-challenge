@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_puzzle_challenge/util/app_constants.dart';
+import 'package:circluzzle/util/app_constants.dart';
 import 'package:just_audio/just_audio.dart';
 
 class MusicUtil {

@@ -2,7 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart' hide Image;
-import 'package:flutter_puzzle_challenge/model/puzzle_piece.dart';
+import 'package:circluzzle/model/puzzle_piece.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 
 class PuzzlePiecePainter extends CustomPainter {

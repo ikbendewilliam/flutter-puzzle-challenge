@@ -5,9 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_puzzle_challenge",
+            "name": "circluzzle",
             "request": "launch",
             "type": "dart"
+        },
+        {
+            "name": "circluzzle release",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--release"
+            ]
         }
     ]
 }

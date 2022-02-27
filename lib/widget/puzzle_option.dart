@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_challenge/widget/puzzle_button.dart';
+import 'package:circluzzle/widget/puzzle_button.dart';
 
 class PuzzleOption extends StatelessWidget {
   final String label;

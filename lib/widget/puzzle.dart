@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_challenge/model/puzzle_piece.dart';
-import 'package:flutter_puzzle_challenge/util/music_util.dart';
-import 'package:flutter_puzzle_challenge/util/painters/puzzle_center_painter.dart';
-import 'package:flutter_puzzle_challenge/util/painters/puzzle_piece_painter.dart';
+import 'package:circluzzle/model/puzzle_piece.dart';
+import 'package:circluzzle/util/music_util.dart';
+import 'package:circluzzle/util/painters/puzzle_center_painter.dart';
+import 'package:circluzzle/util/painters/puzzle_piece_painter.dart';
 import 'dart:ui' as ui;
 
 class Puzzle extends StatefulWidget {

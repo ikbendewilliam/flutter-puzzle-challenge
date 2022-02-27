@@ -1,4 +1,4 @@
-# flutter_puzzle_challenge
+# circluzzle
 
 Play it at: https://ikbendewilliam.github.io/flutter-puzzle-challenge/build/web
 

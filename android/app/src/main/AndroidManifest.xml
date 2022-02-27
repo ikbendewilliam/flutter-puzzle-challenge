@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="be.wive.flutter_puzzle_challenge">
+    package="be.wive.circluzzle">
    <application
-        android:label="flutter_puzzle_challenge"
+        android:label="Circluzzle"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

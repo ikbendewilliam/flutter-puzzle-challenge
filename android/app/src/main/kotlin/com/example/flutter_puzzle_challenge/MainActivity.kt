@@ -1,4 +1,4 @@
-package be.wive.flutter_puzzle_challenge
+package be.wive.circluzzle
 
 import io.flutter.embedding.android.FlutterActivity
 

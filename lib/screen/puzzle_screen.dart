@@ -3,11 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_challenge/util/app_constants.dart';
-import 'package:flutter_puzzle_challenge/util/music_util.dart';
-import 'package:flutter_puzzle_challenge/widget/puzzle.dart';
-import 'package:flutter_puzzle_challenge/widget/puzzle_button.dart';
-import 'package:flutter_puzzle_challenge/widget/puzzle_option.dart';
+import 'package:circluzzle/util/app_constants.dart';
+import 'package:circluzzle/util/music_util.dart';
+import 'package:circluzzle/widget/puzzle.dart';
+import 'package:circluzzle/widget/puzzle_button.dart';
+import 'package:circluzzle/widget/puzzle_option.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 

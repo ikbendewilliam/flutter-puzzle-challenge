@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_puzzle_challenge/util/music_util.dart';
+import 'package:circluzzle/util/music_util.dart';
 
 class PuzzleButton extends StatefulWidget {
   final Color color;
