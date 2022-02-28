@@ -51,9 +51,6 @@ class PuzzlePiecePainter extends CustomPainter {
     canvas.transform(matrix4Image.storage);
     canvas.drawImage(image, Offset((size.width / scale - imageWidth) / 2, (size.height / scale - imageHeight) / 2), paint);
     canvas.restore();
-    canvas.save();
-    canvas.transform(matrix4Path.storage);
-    canvas.restore();
   }
 
   @override

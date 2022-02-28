@@ -211,7 +211,7 @@ class _PuzzleState extends State<Puzzle> {
   void _onTapDown(TapDownDetails details) {
     if (_imageAsUIImage == null || _animationTimer != null) return;
     final size = MediaQuery.of(context).size;
-    var position = details.globalPosition - Offset(size.width, size.height) / 2;
+    var position = (details.globalPosition + details.localPosition) / 2 - Offset(size.width, size.height) / 2;
     position = position / min(size.width, size.height).toDouble() * 2;
     final angle = (atan2(-position.dy, position.dx) + (pi * 2)) % (pi * 2);
     final radius = position.distance;
@@ -250,6 +250,7 @@ class _PuzzleState extends State<Puzzle> {
           ...pieces.asMap().entries.where((e) => e.key != hole).map(
                 (piece) => Positioned.fill(
                   child: CustomPaint(
+                    size: Size(bgWidth, bgWidth),
                     painter: PuzzlePiecePainter(
                       image: _imageAsUIImage!,
                       piece: piece.value,
