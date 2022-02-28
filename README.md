@@ -2,6 +2,8 @@
 
 Play it at: https://ikbendewilliam.github.io/flutter-puzzle-challenge/build/web
 
+[iOS](https://apps.apple.com/us/app/circluzzle/id1611980790)
+
 Devpost: https://devpost.com/software/circular-puzzle
 
 YouTube: https://www.youtube.com/watch?v=3xNA76mouM4
