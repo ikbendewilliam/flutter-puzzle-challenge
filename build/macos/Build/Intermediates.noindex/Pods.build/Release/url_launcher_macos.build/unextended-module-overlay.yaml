@@ -1,0 +1,14 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/williamverhaeghe/Development/git/flutter_puzzle_challenge/build/macos/Build/Products/Release/url_launcher_macos/url_launcher_macos.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/williamverhaeghe/Development/git/flutter_puzzle_challenge/build/macos/Build/Intermediates.noindex/Pods.build/Release/url_launcher_macos.build/unextended-module.modulemap",
+    }]
+  }]
+}

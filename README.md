@@ -2,7 +2,9 @@
 
 Play it at: https://ikbendewilliam.github.io/flutter-puzzle-challenge/build/web
 
-Or download from the store [Android](https://play.google.com/store/apps/details?id=be.wive.circluzzle) [iOS](https://apps.apple.com/us/app/circluzzle/id1611980790)
+Or download from the stores
+- [Android](https://play.google.com/store/apps/details?id=be.wive.circluzzle)
+- [iOS & macOS (review pending)](https://apps.apple.com/us/app/circluzzle/id1611980790)
 
 Devpost: https://devpost.com/software/circular-puzzle
 

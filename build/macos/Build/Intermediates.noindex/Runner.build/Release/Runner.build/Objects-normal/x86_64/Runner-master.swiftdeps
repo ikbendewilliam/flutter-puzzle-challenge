@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
+options: "078503e8419412a2d2edab8ca4435c6038ff192b0ee48d6c3579e3786e4e970e"
+build_start_time: [1646171035, 531545162]
+build_end_time: [1646171043, 784620046]
+inputs:
+  "/Users/williamverhaeghe/Development/git/flutter_puzzle_challenge/macos/Flutter/GeneratedPluginRegistrant.swift": [1646171013, 25711536]
+  "/Users/williamverhaeghe/Development/git/flutter_puzzle_challenge/macos/Runner/AppDelegate.swift": [1645449328, 53066253]
+  "/Users/williamverhaeghe/Development/git/flutter_puzzle_challenge/macos/Runner/MainFlutterWindow.swift": [1645449328, 55430889]
