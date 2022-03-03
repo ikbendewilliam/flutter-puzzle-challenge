@@ -6,8 +6,7 @@ Or download from the stores
 - [Android](https://play.google.com/store/apps/details?id=be.wive.circluzzle)
 - [iOS & macOS](https://apps.apple.com/us/app/circluzzle/id1611980790)
 - [Windows (in review)](https://www.microsoft.com/store/apps/9NXJSXK658B8)
-
-Or Build from this repo (Linux Snap store not supported until [this](https://github.com/canonical/flutter-snap/pull/61) is merged)
+- Linux, build from repo should work, Linux Snap store not supported until [this PR](https://github.com/canonical/flutter-snap/pull/61) is merged
 
 Devpost: https://devpost.com/software/circular-puzzle
 
