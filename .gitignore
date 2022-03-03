@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+.vs/ProjectSettings.json
+.vs/CMakeWorkspaceSettings.json
+.vs/CMake Overview
+.vs/circluzzle/v17/workspaceFileList.bin
+.vs/circluzzle/v17/Browse.VC.db
+.vs/circluzzle/v17/.suo
