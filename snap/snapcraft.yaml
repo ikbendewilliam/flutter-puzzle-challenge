@@ -1,0 +1,34 @@
+name: circluzzle
+version: 1.0.1
+summary: Circluzzle
+description: A Circular sliding puzzle
+
+confinement: strict
+base: core18
+grade: stable
+
+slots:
+  dbus-circluzzle: 
+    interface: dbus
+    bus: session
+    name: be.wive.circluzzle 
+    
+apps:
+  circluzzle:
+    command: circluzzle
+    extensions: [flutter-master]
+    plugs:
+    - network
+    slots:
+      - dbus-circluzzle
+
+parts:
+  circluzzle:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart
+    override-pull: |
+      set -eux
+      rm -rf $SNAPCRAFT_PROJECT_DIR/build
+      snapcraftctl pull
+

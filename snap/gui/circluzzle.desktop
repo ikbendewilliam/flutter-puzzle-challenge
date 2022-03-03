@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Circluzzle
+Comment=A Circular sliding puzzle
+Exec=circluzzle
+Icon=${SNAP}/meta/gui/icon.png
+Terminal=false
+Type=Application
+Categories=Game;
