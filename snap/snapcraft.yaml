@@ -4,31 +4,50 @@ summary: Circluzzle
 description: A Circular sliding puzzle
 
 confinement: strict
-base: core18
+base: core20
 grade: stable
-
-slots:
-  dbus-circluzzle: 
-    interface: dbus
-    bus: session
-    name: be.wive.circluzzle 
+architectures:
+  - build-on: amd64
+compression: lzo
     
 apps:
   circluzzle:
-    command: circluzzle
-    extensions: [flutter-master]
+    command: bin/circluzzle
+    extensions: [gnome-3-38]
     plugs:
-    - network
-    slots:
-      - dbus-circluzzle
+      - network
 
 parts:
+  flutter-git:
+    source: https://github.com/flutter/flutter.git
+    source-branch: stable
+    source-depth: 1
+    plugin: nil
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/bin
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/libexec
+      cp -r $SNAPCRAFT_PART_SRC $SNAPCRAFT_PART_INSTALL/usr/libexec/flutter
+      ln -s $SNAPCRAFT_PART_INSTALL/usr/libexec/flutter/bin/flutter $SNAPCRAFT_PART_INSTALL/usr/bin/flutter
+    build-packages:
+      - clang
+      - cmake
+      - curl
+      - libgtk-3-dev
+      - ninja-build
+      - unzip
+      - xz-utils
+      - zip
+    override-prime: ''
+
   circluzzle:
+    after: [ flutter-git ]
     source: .
-    plugin: flutter
-    flutter-target: lib/main.dart
-    override-pull: |
+    plugin: nil
+    override-build: |
       set -eux
-      rm -rf $SNAPCRAFT_PROJECT_DIR/build
-      snapcraftctl pull
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      flutter upgrade
+      flutter config --enable-linux-desktop
+      flutter doctor
+      cp -r build/linux/*/release/bundle/* $SNAPCRAFT_PART_INSTALL/bin/
 
