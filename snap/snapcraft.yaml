@@ -49,5 +49,7 @@ parts:
       flutter upgrade
       flutter config --enable-linux-desktop
       flutter doctor
+      flutter pub get
+      rm build/linux/x64/release/CMakeCache.txt
+      flutter build linux --release -v
       cp -r build/linux/*/release/bundle/* $SNAPCRAFT_PART_INSTALL/bin/
-

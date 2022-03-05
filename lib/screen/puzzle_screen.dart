@@ -44,7 +44,9 @@ class _PuzzleScreenState extends State<PuzzleScreen> {
   }
 
   Future<void> _loadMusic() async {
-    await MusicUtil.loadMusic();
+    try {
+      await MusicUtil.loadMusic().timeout(const Duration(seconds: 10));
+    } catch (_) {}
     setState(() {
       _loadingMusic = false;
     });
