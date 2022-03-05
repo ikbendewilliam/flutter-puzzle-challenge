@@ -37,7 +37,8 @@ The biggest trouble with Windows I encountered was actually the store. I added t
 Linux was a whole other issue, first of all I don't have a Linux desktop available, so I tried using [WSL 2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10). This doesn't support snap and you need to do some extra stuff for this, there's a [great article](https://forum.snapcraft.io/t/running-snaps-on-wsl2-insiders-only-for-now/13033) you can follow. 
 Even though building may work, creating a snap still fails. Again the issue is with just_audio_libwinmedia. This requires a cmake version > 3.15, but the supported cmake version for flutter-snap is 3.11. There is a [PR](https://github.com/canonical/flutter-snap/pull/61) open for this and the author was generous enough to provide a [gist](https://gist.github.com/kenvandine/de8674a5eaf0d0c6c506bf38f91b9dcd) that shows how to build Flutter from git and with base20 (which resolves the issue with the cmake version). 
 
-Unfortunatly, the snap build is still failling, so I tried something else, based on the gist. I changed the snapcraft to use a previously build version of my app and copy that into the snap. **Note that I haven't been able to test this and it might not work yet.**
+Unfortunatly, the snap build is still failling, the issue is that cmake create a CMakeCache.txt file, this file contains the directory in which it was made, but we copy it to another place. By removing this file before flutter build, this issue is also resolved and the build processes fine! 
+The override-build method of the app parts in snapcraft.yaml:
 ```yaml
   circluzzle:
     after: [ flutter-git ]
@@ -49,5 +50,8 @@ Unfortunatly, the snap build is still failling, so I tried something else, based
       flutter upgrade
       flutter config --enable-linux-desktop
       flutter doctor
+      flutter pub get
+      rm build/linux/x64/release/CMakeCache.txt
+      flutter build linux --release -v
       cp -r build/linux/*/release/bundle/* $SNAPCRAFT_PART_INSTALL/bin/
 ```
