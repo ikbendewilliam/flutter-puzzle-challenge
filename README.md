@@ -4,8 +4,7 @@ You can try it out on
 - [Web](https://ikbendewilliam.github.io/flutter-puzzle-challenge/build/web/) 
 - [iOS & macOS](https://apps.apple.com/us/app/circluzzle/id1611980790) 
 - [Android](https://play.google.com/store/apps/details?id=be.wive.circluzzle)
-- [Windows (in review)](https://www.microsoft.com/store/apps/9NXJSXK658B8) or [backup in review](https://www.microsoft.com/store/apps/9NRR4L78B903
-)
+- [Windows](https://www.microsoft.com/store/apps/9NXJSXK658B8)
 - [Linux](https://snapcraft.io/circluzzle) or `snap install circluzzle`
 
 Or build on your device from the public [repo](https://github.com/ikbendewilliam/flutter-puzzle-challenge)
