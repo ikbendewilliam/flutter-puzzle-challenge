@@ -1,4 +1,4 @@
-# circluzzle
+# Circluzzle
 
 You can try it out on
 - [Web](https://ikbendewilliam.github.io/flutter-puzzle-challenge/build/web/) 
