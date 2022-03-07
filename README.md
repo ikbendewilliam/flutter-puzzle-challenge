@@ -30,7 +30,7 @@ macOS worked right out of the box, I did not have any trouble building, uploadin
 
 This was a bit more difficult, there was more configuration needed and just_audio doesn't support windows out of the box, you need to add [just_audio_libwinmedia](https://github.com/bdlukaa/just_audio_libwinmedia). This plugin caused other issues, but I was able to resolve them following [this issue](https://github.com/bdlukaa/just_audio_libwinmedia/issues/3) by deleting `nuget.config` file located in `AppData\Roaming\nuget\ .` and rebuilding. 
 
-The biggest trouble with Windows I encountered was actually the store. I added the app for review, but got rejected after a couple of days. According to the reviewer, my app is not a "game", even though they have [Sliding puzzles](https://www.microsoft.com/en-us/p/sliding-tiles-puzzle/9nz22xvxg54n?activetab=pivot:overviewtab) in the Microsoft store... For now this hasn't been resolved.
+The biggest trouble with Windows I encountered was actually the store. I added the app for review, but got rejected after a couple of days. According to the reviewer, my app is not a "game", even though they have [Sliding puzzles](https://www.microsoft.com/en-us/p/sliding-tiles-puzzle/9nz22xvxg54n?activetab=pivot:overviewtab) in the Microsoft store. I contacted Microsoft through an email they provided on the rejected page, but didn't get any response. So I added it again in review and waited another few days. This time it did pass. 
 
 **Linux**
 
